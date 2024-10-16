@@ -38,6 +38,7 @@ async function processUploads(uploadsRef, lastProcessedDocKey) {
   snapshot.docs.forEach((doc) => {
     const docData = doc.data();
     const faces = docData.faces || [];
+    faces = faces.map((face) => face.replaceFirst("users/", "")).toList();
     const ownerId = docData.owner_id;
     const sharedWith = new Set([...faces, ownerId]);
 
